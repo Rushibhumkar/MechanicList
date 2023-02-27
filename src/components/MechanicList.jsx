@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View,ScrollView,Linking } from 'react-native'
 import React ,{useState} from 'react'
+import { Icon } from 'react-native-vector-icons/AntDesign'
 import mechanics from '../data/MecData'
 // import Modal from "react-native-modal";
 
@@ -17,52 +18,40 @@ const MechanicList = ({navigation,route}) => {
     // const [textShown, setTextShown] = useState(false);
 
     const {problem} = route.params;
+
+    // const [textShown, setTextShown] = useState(false)
     
 
   return (
     <ScrollView>
       {mechanics.map((item)=>  
-        <View style={[styles.mainCont]}>
+        <View style={[styles.mainCont]}
+            key={item.UID}
+        >
                 <View style={styles.dataCont}>
                     <View style={styles.dataCont}>
                         <Text style={styles.name}>Name : {item.name}</Text>
-                        <Text style={styles.distance}>Rating : {item.distance}</Text>
+                        <Text style={styles.distance}>Rating : {item.rating}</Text>
                         <Text style={styles.location}>Location : {item.location}</Text>
                         <Text style={styles.phoneNum}>Mobile No : {item.phoneNum}</Text>
                     </View>
                 </View>
-            <View style={[styles.row,styles.center]}>
-                    {/* <TouchableOpacity style={[styles.loginbtn,
-                        {
-                            backgroundColor: isSelected ? '#5ECB95' : '#B5EECA' 
-                        }]}
-                        disabled={!isSelected}
-                        onPress={()=> submit()}
+                <View style={[styles.center]}>
+                    <TouchableOpacity
+                        onPress={()=>navigation.navigate('MoreInfo',{mechanic:item})}
+                        style={[styles.showMoreCont]}
                     >
-                    <Text style={[styles.btnText]}>Log in</Text>
-                    </TouchableOpacity> */}
-                    {/* <View style={[styles.row,styles.mTop]}>
-                    <Text style={[styles.gtxt]}>Doesn't have an account yet?</Text>
-                    <TouchableOpacity onPress={()=>navigation.navigate('SignUp',{})}>
-                        <Text style={[styles.signUpText]}>Sign Up</Text>
+                        <Text style={styles.showMoreTxt}>Show More Details...</Text>
                     </TouchableOpacity>
-                    </View> */}
-                <TouchableOpacity
-                    onPress={()=>{
-                        Linking.openURL(`whatsapp://send?phone=${item.phoneNum}&text=Problems:\n${problem}`)
-                    }}
-                    style={[styles.acceptBtn]}
-                >
-                    <Text style={styles.cw}>Hire Mechanic</Text>
-                </TouchableOpacity>
-                {/* <TouchableOpacity
-                    // onPress={()=>{navigation.navigate('')}}
-                    style={[styles.rejectBtn]}
-                >
-                    <Text style={[styles.cw]}>Reject</Text>
-                </TouchableOpacity> */}
-            </View>
-
+                    <TouchableOpacity
+                        onPress={()=>{
+                            Linking.openURL(`whatsapp://send?phone=${item.phoneNum}&text=Problems:\n${problem}`)
+                        }}
+                        style={[styles.acceptBtn]}
+                    >
+                        <Text style={styles.cw}>Hire Mechanic</Text>
+                    </TouchableOpacity>
+                </View>
         </View>
       )}
         
@@ -115,6 +104,19 @@ const styles = StyleSheet.create({
     dataCont:{
         marginLeft:10,
         marginTop:5
+    },
+    center:{
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    showMoreCont:{
+        paddingHorizontal:20,
+        paddingVertical:8,
+        marginRight:8,
+        marginBottom:8
+    },
+    showMoreTxt:{
+        color:'blue'
     }
 
 })

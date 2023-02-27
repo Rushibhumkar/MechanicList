@@ -5,6 +5,7 @@ import MechanicList from './components/MechanicList'
 import CusDetails from './components/CusDetails'
 import DetailsSend from './components/DetailsSend'
 import AcceptReq from './components/AcceptReq'
+import MoreInfo from './components/MoreInfo'
 
 const MainFile = () => {
 
@@ -18,6 +19,7 @@ const MainFile = () => {
         <Stack.Screen name="MechanicList" component={MechanicList}/>
         <Stack.Screen name="DetailsSend" component={DetailsSend}/>
         <Stack.Screen name="AcceptReq" component={AcceptReq}/>
+        <Stack.Screen name="MoreInfo" component={MoreInfo}/>
     </Stack.Navigator>
   )
 }
